@@ -272,7 +272,7 @@ func (s *RulesService) writeRuleFile(rule *ruleFile) error {
 
 // ListAlertRules returns a list of all Integrated Alerting rules.
 // Deprecated. Do not use.
-func (s *RulesService) ListAlertRules(ctx context.Context, req *iav1beta1.ListAlertRulesRequest) (*iav1beta1.ListAlertRulesResponse, error) {
+func (s *RulesService) ListAlertRules(ctx context.Context, req *iav1beta1.ListAlertRulesRequest) (*iav1beta1.ListAlertRulesResponse, error) { //nolint:staticcheck
 	var pageIndex int
 	pageSize := math.MaxInt32
 	if req.PageParams != nil {
@@ -328,7 +328,7 @@ func (s *RulesService) ListAlertRules(ctx context.Context, req *iav1beta1.ListAl
 		TotalPages: int32(totalPages),
 	}
 
-	return &iav1beta1.ListAlertRulesResponse{Rules: res, Totals: totals}, nil
+	return &iav1beta1.ListAlertRulesResponse{Rules: res, Totals: totals}, nil //nolint:staticcheck
 }
 
 func (s *RulesService) convertAlertRules(rules []*models.Rule, channels []*models.Channel) ([]*iav1beta1.Rule, error) {
@@ -346,7 +346,7 @@ func (s *RulesService) convertAlertRules(rules []*models.Rule, channels []*model
 
 // CreateAlertRule creates Integrated Alerting rule.
 // Deprecated. Do not use.
-func (s *RulesService) CreateAlertRule(ctx context.Context, req *iav1beta1.CreateAlertRuleRequest) (*iav1beta1.CreateAlertRuleResponse, error) {
+func (s *RulesService) CreateAlertRule(ctx context.Context, req *iav1beta1.CreateAlertRuleRequest) (*iav1beta1.CreateAlertRuleResponse, error) { //nolint:staticcheck
 	if req.TemplateName != "" && req.SourceRuleId != "" {
 		return nil, status.Errorf(codes.InvalidArgument, "Both template name and source rule id are specified.")
 	}
@@ -442,12 +442,12 @@ func (s *RulesService) CreateAlertRule(ctx context.Context, req *iav1beta1.Creat
 
 	s.updateConfigurations()
 
-	return &iav1beta1.CreateAlertRuleResponse{RuleId: rule.ID}, nil
+	return &iav1beta1.CreateAlertRuleResponse{RuleId: rule.ID}, nil //nolint:staticcheck
 }
 
 // UpdateAlertRule updates Integrated Alerting rule.
 // Deprecated. Do not use.
-func (s *RulesService) UpdateAlertRule(ctx context.Context, req *iav1beta1.UpdateAlertRuleRequest) (*iav1beta1.UpdateAlertRuleResponse, error) {
+func (s *RulesService) UpdateAlertRule(ctx context.Context, req *iav1beta1.UpdateAlertRuleRequest) (*iav1beta1.UpdateAlertRuleResponse, error) { //nolint:staticcheck
 	params := &models.ChangeRuleParams{
 		Name:         req.Name,
 		Disabled:     req.Disabled,
@@ -491,7 +491,7 @@ func (s *RulesService) UpdateAlertRule(ctx context.Context, req *iav1beta1.Updat
 
 	s.updateConfigurations()
 
-	return &iav1beta1.UpdateAlertRuleResponse{}, nil
+	return &iav1beta1.UpdateAlertRuleResponse{}, nil //nolint:staticcheck
 }
 
 // ToggleAlertRule allows switching between disabled and enabled states of an Alert Rule.

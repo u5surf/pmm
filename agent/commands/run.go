@@ -109,7 +109,7 @@ func Run() {
 func processClientUntilCancel(ctx context.Context, client *client.Client, reloadCh chan bool) {
 	for {
 		clientCtx, cancelClientCtx := context.WithCancel(ctx)
-		client.Run(clientCtx)
+		client.Run(clientCtx) //nolint:errcheck
 
 		cancelClientCtx()
 		<-client.Done()

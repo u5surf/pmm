@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"io"
 	"math"
-	"sync"
 	"time"
 
 	"github.com/AlekSi/pointer" // register SQL driver
@@ -55,20 +54,7 @@ type mySQLVersion struct {
 
 // versionsCache provides cached access to MySQL version.
 type versionsCache struct {
-	rw    sync.RWMutex
 	items map[string]*mySQLVersion
-}
-
-func (m *PerfSchema) mySQLVersion() *mySQLVersion {
-	m.versionsCache.rw.RLock()
-	defer m.versionsCache.rw.RUnlock()
-
-	res := m.versionsCache.items[m.agentID]
-	if res == nil {
-		return &mySQLVersion{}
-	}
-
-	return res
 }
 
 const (
